@@ -12,6 +12,7 @@
             <input type="text" name="next2" size="1" placeholder="мм">
             <input type="text" name="next3" size="1" placeholder="сс">
         </form>
+        <audio id="xyz" src="1.mp3" preload="audio"></audio>
     </center>
      <script language="JavaScript">
         let timer=null, timerrun=false;
@@ -53,8 +54,10 @@
             timevalue += ((minutes<10) ? " :0" : " : ") + minutes;
             timevalue += ((seconds<10) ? " :0" : " : ") + seconds;
             document.clock.next.value=timevalue;
-            if (document.clock.next1.value == hours && document.clock.next2.value == minutes && document.clock.next3.value == seconds)
-                alert("ALARM!");
+            var audio = new Audio('1.mp3');
+            if (document.clock.next1.value == hours && document.clock.next2.value == minutes && document.clock.next3.value == seconds) {
+                document.getElementById('xyz').play();
+            }
             timer=setTimeout('showtime()',1000);
             timerrun=true;
         }
