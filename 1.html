@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <title>Clock</title>
+    </head>
+  <body bgcolor=F5DEB3 text=8B4513 onLoad="starttime()">
+    <center>
+        <H3>Clock</H3>
+        <form name=clock>
+            <input type=text name=next size=25 value=' '>
+            <H3>Будильник</H3>
+            <input type="text" name="next1" size="1" placeholder="чч">
+            <input type="text" name="next2" size="1" placeholder="мм">
+            <input type="text" name="next3" size="1" placeholder="сс">
+        </form>
+    </center>
+     <script language="JavaScript">
+        let timer=null, timerrun=false;
+         let clock = document.getElementsByName('clock')[0];
+         let inps = clock.querySelectorAll('input');
+         inps[1].focus();
+         function moveFocus(el) {
+             if(el.value.length == 2){
+                 if(el.nextElementSibling)
+                    el.nextElementSibling.focus();
+                 else
+                     el.blur();
+             }
+         }
+         for(let i = 1; i < inps.length; i++)
+                 inps[i].addEventListener('keyup', () => moveFocus(inps[i]));
+ 
+        function stoptime() {
+            if(timerrun)
+                clearTimeout(timer);
+            timerrun=false;
+        }
+        function starttime() {
+            stoptime();
+            showtime();
+        }
+        function showtime() {
+            var all=new Date();
+            var year = all.getFullYear();
+            var month = all.getMonth();
+            var day = all.getDate();
+            var hours=all.getHours();
+            var minutes=all.getMinutes();
+            var seconds=all.getSeconds();
+            var datavalue =" " + day + ".";
+            datavalue += (month+1) + ".";
+            datavalue += year;
+            var timevalue=datavalue + " " + hours;
+            timevalue += ((minutes<10) ? " :0" : " : ") + minutes;
+            timevalue += ((seconds<10) ? " :0" : " : ") + seconds;
+            document.clock.next.value=timevalue;
+            if (document.clock.next1.value == hours && document.clock.next2.value == minutes && document.clock.next3.value == seconds)
+                alert("ALARM!");
+            timer=setTimeout('showtime()',1000);
+            timerrun=true;
+        }
+      </script>
+  </body>
+</html>
